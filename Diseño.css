@@ -1,0 +1,119 @@
+﻿:root {
+  --main-color: red; /* Cambia esta variable y cambia TODO */
+  --bg-color: white;
+  --line-color: black;
+  --page-bg: #d3d3d3;
+  --size: clamp(200px, 40vw, 400px);
+}
+
+/* Fondo de la página */
+body {
+  background: var(--page-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Layout principal con GRID */
+.pokeball {
+  display: grid;
+  grid-template-rows: 1fr 0.15fr 1fr;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--line-color);
+}
+
+/* Selector hijo directo */
+.pokeball > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mitad superior */
+.top {
+  background: var(--main-color);
+}
+
+/* Línea central */
+.middle {
+  background: var(--line-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centro */
+.center {
+  width: 25%;
+  aspect-ratio: 1;
+  background: var(--bg-color);
+  border-radius: 50%;
+  border: 8px solid var(--line-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Punto interno */
+.center::after {
+  content: "";
+  width: 40%;
+  aspect-ratio: 1;
+  background: var(--line-color);
+  border-radius: 50%;
+}
+
+/* Mitad inferior */
+.bottom {
+  background: var(--bg-color);
+}
+
+/* :first-child y :last-child */
+.pokeball div:first-child {
+  border-top-left-radius: 100% 100%;
+  border-top-right-radius: 100% 100%;
+}
+
+.pokeball div:last-child {
+  border-bottom-left-radius: 100% 100%;
+  border-bottom-right-radius: 100% 100%;
+}
+
+/* nth-child */
+.pokeball div:nth-child(2) {
+  z-index: 1;
+}
+
+/* Selector adyacente */
+.top + .middle {
+  box-shadow: 0 4px 0 var(--line-color);
+}
+
+/* Selector general */
+.top ~ .bottom {
+  border-top: 4px solid var(--line-color);
+}
+
+/* :has() */
+.pokeball:has(.center:hover) {
+  --main-color: crimson;
+}
+
+/* Nesting CSS */
+.pokeball {
+  & .top {
+    transition: background 0.3s;
+  }
+}
+
+/* Regla condicional */
+@media (max-width: 500px) {
+  .pokeball {
+    --size: 150px;
+  }
+}
